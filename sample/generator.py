@@ -5,6 +5,8 @@ from optparse import OptionParser
 parser = OptionParser()
 parser.add_option("-n", "--number", type="int", dest="n",
         help="print n number of french expressions", metavar="NUMBER")
+parser.add_option("-d", "--debug", dest="debug", action="store_true",
+        help="print debug messages", metavar="BOOLEAN")
 (options, args) = parser.parse_args()
 
 from sounds import get_sounds
@@ -29,6 +31,8 @@ def find_matching(sounds, animals, adjectives):
     sound = sounds[random.choice(list(sounds.keys()))]
     #print(sound)
 
+    if options.debug:
+        print(sound)
     matching_animals = match(sound, animals)
     matching_adjectives = match(sound, adjectives)
     if matching_animals and matching_adjectives:
@@ -47,7 +51,10 @@ def generate():
 
     i = 0
     while (i < options.n):
-        animals, adjectives = find_matching(sounds, f_animals, f_adjectives)
+        female = bool(random.getrandbits(1))
+        animals, adjectives = find_matching(sounds,
+                f_animals if female else m_animals,
+                f_adjectives if female else m_adjectives)
         for animal in animals:
             if (i < options.n):
                 print(random_choice(adjectives) + " " + animal)
