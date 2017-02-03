@@ -43,7 +43,6 @@ def find_matching(sounds, animals, adjectives):
     else:
         return find_matching(sounds, animals, adjectives)
 
-
 def generate():
     f_animals = read_datas("female_animals")
     f_adjectives = read_datas("female_adjectives")
@@ -58,9 +57,17 @@ def generate():
         animals, adjectives = find_matching(sounds,
                 f_animals if female else m_animals,
                 f_adjectives if female else m_adjectives)
-        for animal in animals:
-            if (i < options.n):
-                print(random_choice(adjectives) + " " + animal)
-            i += 1
+
+        if len(animals) < len(adjectives):
+            for animal in animals:
+                if (i < options.n):
+                    print(random_choice(adjectives) + " " + animal)
+                i += 1
+        else:
+            for adjective in adjectives:
+                if (i < options.n):
+                    print(adjective + " " + random_choice(animals))
+                i += 1
+
 
 

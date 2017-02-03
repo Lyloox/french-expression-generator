@@ -4,9 +4,9 @@ sounds = {
         "a": ["a", "at", "ât", "as"],
         "eu": ["eux", "eut", "eue", "eu"],
         "é": ["é", "ée", "ger", "nier", "tier", "lier", "vier"],
-        "è": ["è", "ès", "ai", "aie", "et", "ais", "ait", "ey"],
+        "è": ["è", "ès", "ai", "aie", "et", "ais", "ait", "ey", "ay"],
         "i": ["i", "ie", "is", "rit", "til", "ï", "tit", "y"],
-        "o": ["o", "au", "aux", "aud", "aut", "ros", "ot"],
+        "o": ["o", "au", "aux", "aud", "aut", "gros", "ot"],
         "u": ["ru", "gu", "nu", "du", "lu", "bu", "lue", "tue", "due", "nue", "rue", "us"],
         "ou": ["ou", "oux", "oue", "oup", "out"],
 
@@ -18,6 +18,7 @@ sounds = {
         # 2-syll sounds
         "al": ["al", "alle", "ale", "âl", "âle", "âlle"],
         "aj": ["age", "aje", "aj", "âge"],
+        "ag": ["ague"],
         "as": ["as", "asse", "ace", "âce", "âsse"],
         "ar": ["ar", "arre", "are", "âre", "ard"],
         "av": ["av", "ave", "âve"],
@@ -30,10 +31,11 @@ sounds = {
         "ab": ["abe"],
         "af": ["aphe", "afe"],
         "am": ["ame", "âme"],
+        "az": ["aze"],
 
         "el": ["el", "elle", "èle", "aile"],
         "èt": ["ète", "aite", "ette", "ête"],
-        "èz": ["aise", "èse"],
+        "ez": ["aise", "èse", "èze"],
         "èr": ["aire", "ère", "ere", "erre", "ert", "erf", "mer", "fier", "hamster", "ver"],
         "èn": ["aine", "ène", "enne", "eine", "êne", "aigne", "aines"],
         "èy": ["eille", "eil"],
@@ -50,6 +52,7 @@ sounds = {
         "eur": ["eur", "eure", "eurre"],
         "euy": ["euil"],
         "eum": ["sum"],
+        "eun": ["eune"],
 
         "ans": ["anse", "ense", "ance", "ence"],
         "ant": ["ante", "ente"],
@@ -57,20 +60,20 @@ sounds = {
         "amp": ["ampe"],
 
         "ik": ["ique", "ic"],
-        "il": ["ile", "tranquille", "ril", "Nil", "ill", "tile"],
+        "il": ["ile", "tranquille", "ril", "Nil", "ill", "tile", "vile", "vil"],
         "iy": ["tille", "nille", "guille", "rille"],
-        "ine": ["pine", "tine", "quine", "yne", "inne", "fine", "dine", "ouine", "mine"],
+        "ine": ["pine", "tine", "quine", "yne", "inne", "fine", "dine", "ouine", "mine", "igne"],
         "ins": ["ins", "ince"],
         "id": ["id", "ide", "ides"],
-        "iv": ["iv", "ive"],
+        "iv": ["iv", "ive", "ïve"],
         "ite": ["ite", "ites"],
         "is": ["isse", "ice"],
-        "if": ["if", "iphe"],
+        "if": ["if", "iphe", "ïf"],
         "im": ["ime", "imme", "îme"],
         "ib": ["ibe", "ïbe", "ïbes"],
         "ish": ["ish"],
         "ir": ["ire"],
-        "iz": ["ise"],
+        "iz": ["cise", "rise"],
         "ix": ["yx"],
 
         "os": ["céros", "osse", "ausse"],
@@ -78,7 +81,7 @@ sounds = {
         "ob": ["ob", "obe"],
         "ok": ["oque", "oq", "ock"],
         "or": ["or", "orc", "ore"],
-        "om": ["ome"],
+        "om": ["ome", "ôme"],
         "ol": ["ole", "ol", "ôle"],
         "of": ["of", "ophe"],
         "op": ["ope", "aupe"],
@@ -111,6 +114,7 @@ sounds = {
         "ush": ["uche"],
         "us": ["usse"],
         "uz": ["duse", "buse", "fuse"],
+        "uk": ["uc"],
 
         "ind": ["inde"],
         "inx": ["ynx"],
@@ -125,6 +129,7 @@ sounds = {
         "ast": ["aste", "ast"],
         "akt": ["acte", "act"],
         "atr": ["atre", "âtre"],
+        "ask": ["asque"],
         "arp": ["arpe"],
 
         "egr": ["ègre", "aigre"],
@@ -144,6 +149,7 @@ sounds = {
         "idr": ["idre", "ydre"],
         "ikt": ["ict", "icte"],
         "igr": ["tigre"],
+        "itsh": ["itsch"],
 
         "imbl":["umble", "imble"],
 
@@ -166,10 +172,14 @@ sounds = {
 
         # 4-syll sounds
         "andr": ["andre"],
+
+        "estr": ["estre"],
+        "euvr": ["euvre"],
+
         "oulp": ["oulpe"],
         "outr": ["outre"],
-        "estr": ["estre"],
-        "euvr": ["euvre"]
+
+        "urn": ["urne"]
 
         }
 
