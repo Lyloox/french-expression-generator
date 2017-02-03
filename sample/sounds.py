@@ -33,8 +33,10 @@ sounds = {
         "èl"
 
         "ik": ["ique"],
-        "il": ["il", "ille", "ile"],
-        "ille": ["ille"],
+        "il": ["il", "ile"],
+        #"ille": ["ille"],
+        "ay": ["aille", "aye", "aïe"],
+        "ey": ["eille"],
         "ine": ["ine"],
         "ins": ["ins", "ince"],
         "id": ["id", "ide", "ides"],

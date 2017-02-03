@@ -1,10 +1,17 @@
 import random
 import re
+from optparse import OptionParser
+
+parser = OptionParser()
+parser.add_option("-n", "--number", type="int", dest="n",
+        help="print n number of french expressions", metavar="NUMBER")
+(options, args) = parser.parse_args()
 
 from sounds import get_sounds
 
+
 def read_datas(file):
-    with open("../data/" + file + ".in") as datas:
+    with open("data/" + file + ".in") as datas:
         data_list = [name.strip() for name in datas]
     return data_list
 
@@ -37,11 +44,13 @@ def generate():
     m_adjectives = read_datas("male_adjectives")
 
     sounds = get_sounds()
-    animals, adjectives = find_matching(sounds, f_animals, f_adjectives)
 
-    for animal in animals:
-        print(random_choice(adjectives) + " " + animal)
+    i = 0
+    while (i < options.n):
+        animals, adjectives = find_matching(sounds, f_animals, f_adjectives)
+        for animal in animals:
+            if (i < options.n):
+                print(random_choice(adjectives) + " " + animal)
+            i += 1
 
-
-generate()
 
