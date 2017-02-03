@@ -9,6 +9,9 @@ parser.add_option("-d", "--debug", dest="debug", action="store_true",
         help="print debug messages", metavar="BOOLEAN")
 (options, args) = parser.parse_args()
 
+if not options.n:
+    options.n = 1
+
 from sounds import get_sounds
 
 
