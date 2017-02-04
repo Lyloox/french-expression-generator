@@ -1,3 +1,4 @@
+import random
 
 sounds = {
         # 1-syll sounds sounds
@@ -189,5 +190,22 @@ sounds = {
 
         }
 
-def get_sounds():
-    return sounds
+def match(suffix, alist):
+    matching = []
+    for name in alist:
+        if name.endswith(tuple(suffix)):
+            matching.append(name)
+    return matching
+
+def find_matching(options, lista, listb):
+    sound = sounds[random.choice(list(sounds.keys()))]
+    #print(sound)
+
+    if options.debug:
+        print(sound)
+    matching_lista = match(sound, lista)
+    matching_listb = match(sound, listb)
+    if matching_lista and matching_listb:
+        return matching_lista, matching_listb
+    else:
+        return find_matching(options, lista, listb)

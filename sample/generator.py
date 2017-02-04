@@ -1,6 +1,6 @@
 import random
 import re
-from sounds import get_sounds
+from sounds import find_matching
 
 def read_datas(file):
     with open("data/" + file + ".in") as datas:
@@ -10,25 +10,19 @@ def read_datas(file):
 def random_choice(alist):
     return alist[random.randint(0, len(alist) - 1)]
 
-def match(suffix, alist):
-    matching = []
-    for name in alist:
-        if name.endswith(tuple(suffix)):
-            matching.append(name)
-    return matching
-
-def find_matching(options, sounds, animals, adjectives):
-    sound = sounds[random.choice(list(sounds.keys()))]
-    #print(sound)
-
-    if options.debug:
-        print(sound)
-    matching_animals = match(sound, animals)
-    matching_adjectives = match(sound, adjectives)
-    if matching_animals and matching_adjectives:
-        return matching_animals, matching_adjectives
+def randomize_shortest_based(lista, listb, i, n):
+    results = []
+    if len(lista) < len(listb):
+        for a in lista:
+            if (i < n):
+                results.append(' '.join([random_choice(listb), a]))
+            i += 1
     else:
-        return find_matching(options, sounds, animals, adjectives)
+        for b in listb:
+            if (i < n):
+                results.append(' '.join([b, random_choice(lista)]))
+            i += 1
+    return results, i
 
 def generate_animals(options):
     f_animals = read_datas("female_animals")
@@ -36,25 +30,17 @@ def generate_animals(options):
     m_animals = read_datas("male_animals")
     m_adjectives = read_datas("male_adjectives")
 
-    sounds = get_sounds()
-
     i = 0
     while (i < options.n):
         female = bool(random.getrandbits(1))
-        animals, adjectives = find_matching(options, sounds,
+        animals, adjectives = find_matching(options,
                 f_animals if female else m_animals,
                 f_adjectives if female else m_adjectives)
 
-        if len(animals) < len(adjectives):
-            for animal in animals:
-                if (i < options.n):
-                    print(random_choice(adjectives) + " " + animal)
-                i += 1
-        else:
-            for adjective in adjectives:
-                if (i < options.n):
-                    print(adjective + " " + random_choice(animals))
-                i += 1
+        results, i = randomize_shortest_based(animals, adjectives, i, options.n)
+        for result in results:
+            print(result)
+
 
 def generate_sentence(*words):
     if len(words) == 1 and type(words[0]) is list:
@@ -67,6 +53,12 @@ def generate_random_sentence(*lists):
     for alist in lists:
         chosen.append(random_choice(alist))
     return generate_sentence(chosen)
+
+class words_details:
+    def __init__(female, plural):
+        self.female = (female == 1)
+        self.plural = (plural == 1)
+
 
 def generate_expressions(options):
     verbs = read_datas("verbs")
