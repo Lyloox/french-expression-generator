@@ -92,7 +92,7 @@ sounds = {
         "op": ["ope", "aupe"],
         "ot": ["otte", "otl"],
         "od": ["ode"],
-        "ad": ["aude"], # different from "od" in parisian french...
+        "aud": ["aude"], # different from "od" in parisian french...
         "og": ["ogue"],
 
         "oul": ["ool", "oule", "oul"],
@@ -199,10 +199,9 @@ def match(suffix, alist):
 
 def find_matching(options, lista, listb):
     sound = sounds[random.choice(list(sounds.keys()))]
-    #print(sound)
-
     if options.debug:
         print(sound)
+
     matching_lista = match(sound, lista)
     matching_listb = match(sound, listb)
     if matching_lista and matching_listb:
