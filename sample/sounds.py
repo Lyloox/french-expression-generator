@@ -117,7 +117,7 @@ sounds = {
 
         "ut": ["ute", "uth"],
         "ur": ["ur", "ure", "ûre"],
-        "ul": ["ule", "ul"],
+        "ul": ["cule", "ul", "dule", ],
         "ush": ["uche"],
         "us": ["usse"],
         "uz": ["duse", "buse", "fuse"],
