@@ -54,11 +54,21 @@ def generate_random_sentence(*lists):
         chosen.append(random_choice(alist))
     return generate_sentence(chosen)
 
-class words_details:
-    def __init__(female, plural):
+class grammar_details:
+    def __init__(self, female=bool(random.getrandbits(1)),
+            plural=bool(random.getrandbits(1))):
         self.female = (female == 1)
         self.plural = (plural == 1)
 
+def match_gender(female, female_thing, male_thing):
+    return female_thing if female else male_thing
+
+def match_grammar(g_details, female_singular, male_singular,
+        female_plural, male_plural):
+    if g_details.plural:
+        return match_gender(g_details.female, female_plural, male_plural)
+    else:
+        return match_gender(g_details.female, female_singular, male_singular)
 
 def generate_expressions(options):
     verbs = read_datas("verbs")
@@ -77,40 +87,33 @@ def generate_expressions(options):
 
     i = 0
     while (i < options.n):
-        x = random.randint(0, 1)
+        x = random.randint(0, 2)
         if options.debug:
             print(x)
+
         if x == 0:
             print(generate_random_sentence(verbs, names, adverbial_phrases))
         elif x == 1:
             print(generate_random_sentence(verbs, names, prepositions, names))
-        '''
         elif x == 2:
-            female = bool(random.getrandbits(1))
-            plural = bool(random.getrandbits(1))
+            gd = grammar_details()
 
-            if plural:
-                adj = random_choice(f_adjectives if female else m_adjectives)
+            adj = random_choice(match_gender(gd.female, f_adjectives,
+                    m_adjectives))
+            if gd.plural:
                 if not adj.endswith("x"):
                     adj = adj + "s"
-                print(adj)
+
+            print(generate_random_sentence(
+                prepositions, names, prepositions, names, coordinators,
+                match_grammar(gd, f_s_names, m_s_names, f_p_names, m_p_names),
+                ["sont"] if gd.plural else ["est"],
+                [adj]
+                ))
 
 
-            print(random_choice(prepositions) + " " + \
-                    random_choice(names) + " " + \
-                    random_choice(prepositions) + " " + \
-                    random_choice(names) + " " + \
-                    random_choice(coordinators) + " " + \
 
-                    random_choice(f_p_names if female else m_p_names) + \
-                    " est " + random_choice(f_adjectives if female
-                        else m_adjectives)
-                    if plural else
-                    random_choice(f_s_names if female else m_s_names) + \
-                    " sont " + adj
-                    )
         elif x == 3:
             print(generate_random_sentence(verbs, prepositions, names,
                 coordinators, name))
-        '''
         i += 1
