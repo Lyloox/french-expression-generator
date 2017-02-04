@@ -1,19 +1,6 @@
 import random
 import re
-from optparse import OptionParser
-
-parser = OptionParser()
-parser.add_option("-n", "--number", type="int", dest="n",
-        help="print n number of french expressions", metavar="NUMBER")
-parser.add_option("-d", "--debug", dest="debug", action="store_true",
-        help="print debug messages", metavar="BOOLEAN")
-(options, args) = parser.parse_args()
-
-if not options.n:
-    options.n = 1
-
 from sounds import get_sounds
-
 
 def read_datas(file):
     with open("data/" + file + ".in") as datas:
@@ -30,7 +17,7 @@ def match(suffix, alist):
             matching.append(name)
     return matching
 
-def find_matching(sounds, animals, adjectives):
+def find_matching(options, sounds, animals, adjectives):
     sound = sounds[random.choice(list(sounds.keys()))]
     #print(sound)
 
@@ -41,9 +28,9 @@ def find_matching(sounds, animals, adjectives):
     if matching_animals and matching_adjectives:
         return matching_animals, matching_adjectives
     else:
-        return find_matching(sounds, animals, adjectives)
+        return find_matching(options, sounds, animals, adjectives)
 
-def generate():
+def generate_animals(options):
     f_animals = read_datas("female_animals")
     f_adjectives = read_datas("female_adjectives")
     m_animals = read_datas("male_animals")
@@ -54,7 +41,7 @@ def generate():
     i = 0
     while (i < options.n):
         female = bool(random.getrandbits(1))
-        animals, adjectives = find_matching(sounds,
+        animals, adjectives = find_matching(options, sounds,
                 f_animals if female else m_animals,
                 f_adjectives if female else m_adjectives)
 
@@ -71,3 +58,43 @@ def generate():
 
 
 
+def generate_expressions(options):
+    verbs = read_datas("verbs")
+    adverbial_phrases = read_datas("adverbial_phrases")
+    coordinators = read_datas("coordinators")
+    prepositions = read_datas("prepositions")
+    m_names = read_datas("male_names")
+    f_names = read_datas("female_names")
+
+    i = 0
+    while (i < options.n):
+        x = random.randint(0, 3)
+        if options.debug:
+            print(x)
+        if x == 0:
+            print(random_choice(verbs) + " " + \
+                            random_choice(m_names + f_names) + " " + \
+                            random_choice(adverbial_phrases)
+                    )
+        elif x == 1:
+            print(random_choice(verbs) + " " + \
+                            random_choice(m_names + f_names) + " " + \
+                            random_choice(prepositions) + " " + \
+                            random_choice(m_names + f_names) + " "
+                    )
+        elif x == 2:
+            print(random_choice(prepositions) + " " + \
+                            random_choice(m_names + f_names) + " " + \
+                            random_choice(prepositions) + " " + \
+                            random_choice(m_names + f_names) + " " + \
+                            random_choice(coordinators) + " " + \
+                            random_choice(m_names + f_names)
+                    )
+        elif x == 3:
+            print(random_choice(verbs) + " " + \
+                            random_choice(prepositions) + " " + \
+                            random_choice(m_names + f_names) + " " + \
+                            random_choice(coordinators) + " " + \
+                            random_choice(m_names + f_names) + " "
+                    )
+        i += 1
