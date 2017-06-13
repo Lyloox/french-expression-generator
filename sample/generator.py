@@ -34,15 +34,22 @@ def generate_animals(options):
     m_adjectives = read_datas("male_adjectives")
 
     i = 0
+    animals_set = set()
     while (i < options.n):
         female = bool(random.getrandbits(1))
         animals, adjectives = find_matching(options,
                 f_animals if female else m_animals,
                 f_adjectives if female else m_adjectives)
 
-        results, i = randomize_shortest_based(animals, adjectives, i, options.n)
+        results, _ = randomize_shortest_based(animals, adjectives, i, options.n)
         for result in results:
-            print(upperfirst(result + "."))
+            animals_set.add(upperfirst(result + "."))
+        i = len(animals_set)
+    return animals_set
+
+def print_animals(options):
+    for animal in generate_animals(options):
+        print(animal)
 
 def generate_sentence(*words):
     if len(words) == 1 and type(words[0]) is list:
@@ -98,19 +105,22 @@ def generate_expressions(options):
     names = m_s_names + m_p_names + f_s_names + f_p_names
 
     i = 0
+    exprs = set()
     while (i < options.n):
         x = random.randint(0, 3)
         if options.debug:
             print(x)
 
         if x == 0:
-            print(generate_random_sentence(verbs, names, adverbial_phrases))
+            exprs.add(generate_random_sentence(verbs, names,
+                adverbial_phrases))
         elif x == 1:
-            print(generate_random_sentence(verbs, names, prepositions, names))
+            exprs.add((generate_random_sentence(verbs, names, prepositions,
+                names)))
         elif x == 2:
             gd = grammar_details()
 
-            print(generate_random_sentence(
+            exprs.add(generate_random_sentence(
                 prepositions, names, prepositions, names, coordinators,
                 match_grammar(gd, f_s_names, m_s_names, f_p_names, m_p_names),
                 ["sont"] if gd.plural else ["est"],
@@ -118,5 +128,10 @@ def generate_expressions(options):
                 ))
 
         elif x == 3:
-            print(generate_random_sentence(verbs, prepositions, names))
-        i += 1
+            exprs.add(generate_random_sentence(verbs, prepositions, names))
+        i = len(exprs)
+    return exprs
+
+def print_expressions(options):
+    for expr in generate_expressions(options):
+        print(expr)

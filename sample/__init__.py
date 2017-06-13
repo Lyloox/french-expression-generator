@@ -1,4 +1,4 @@
-from generator import generate_animals, generate_expressions
+from generator import print_animals, print_expressions
 from optparse import OptionParser
 
 parser = OptionParser()
@@ -13,6 +13,6 @@ parser.add_option("-d", "--debug", dest="debug", action="store_true",
 
 if __name__ == "__main__":
     if options.category == "animals":
-        generate_animals(options)
+        print_animals(options)
     else:
-        generate_expressions(options)
+        print_expressions(options)
